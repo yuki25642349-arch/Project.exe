@@ -1,3 +1,3 @@
 # test-git-windows
-tfd
-test
+
+tests
