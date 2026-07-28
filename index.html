@@ -1,11 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLACK THREAD - メンズ服紹介サイト</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+  <main class="site">
+    <nav class="nav" aria-label="メインナビゲーション">
+      <a class="brand" href="#top">
+        <span class="brand-mark">BT</span>
+        <span>BLACK THREAD</span>
+      </a>
+      <div class="nav-links">
+        <a href="#styles">Styles</a>
+        <a href="#lookbook">Lookbook</a>
+        <a href="#guide">Guide</a>
+        <a href="#stylist">AI Stylist</a>
+      </div>
+    </nav>
+
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Men's fashion edit</p>
+        <h1>BLACK THREAD</h1>
+        <p>黒をベースに、清潔感と都会感を両立するメンズ服を紹介。ストリート、ミニマル、スマートカジュアルまで、明日そのまま着られる組み合わせを集めました。</p>
+        <div class="hero-actions">
+          <a class="primary" href="#styles">コーデを見る</a>
+          <a class="ghost" href="#stylist">AIに相談</a>
+        </div>
+      </div>
+      <div class="hero-visual" role="img" aria-label="黒基調のメンズファッション">
+        <div class="hero-badge">
+          <div class="badge">
+            <strong>12</strong>
+            <span>厳選スタイル</span>
+          </div>
+          <div class="badge">
+            <strong>3</strong>
+            <span>着こなし軸</span>
+          </div>
+          <div class="badge">
+            <strong>AI</strong>
+            <span>スタイル相談</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="styles">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Selected outfits</p>
+          <h2>おすすめメンズスタイル</h2>
+        </div>
+        <p>色数を抑えて、シルエットと素材感で差を出すラインナップ。気分や予定に合わせて絞り込めます。</p>
+      </div>
+
+      <div class="filters" aria-label="スタイル絞り込み">
+        <button class="filter active" type="button" data-filter="all">すべて</button>
+        <button class="filter" type="button" data-filter="street">ストリート</button>
+        <button class="filter" type="button" data-filter="minimal">ミニマル</button>
+        <button class="filter" type="button" data-filter="smart">スマート</button>
+      </div>
+
+      <div class="grid" id="styleGrid">
+        <article class="card" data-category="street">
+          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1506629905607-d9b297d736ce?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="card-body">
+            <div class="tags"><span class="tag hot">street</span><span class="tag daily">daily</span></div>
+            <h3>ブラックデニム + オーバーシャツ</h3>
+            <p>ゆるめのシャツに細身のパンツを合わせて、重く見せずに黒を主役にする定番コーデ。</p>
+          </div>
+        </article>
+
+        <article class="card" data-category="minimal">
+          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="card-body">
+            <div class="tags"><span class="tag clean">minimal</span><span class="tag daily">clean</span></div>
+            <h3>白T + テーパードパンツ</h3>
+            <p>無地アイテムだけで成立する清潔感重視の組み合わせ。靴を黒にすると全体が締まります。</p>
+          </div>
+        </article>
+
+        <article class="card" data-category="smart">
+          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1507680434567-5739c80be1ac?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="card-body">
+            <div class="tags"><span class="tag clean">smart</span><span class="tag">date</span></div>
+            <h3>ジャケット + ニット</h3>
+            <p>きれいめだけど固すぎない、食事や外出に使いやすいスタイル。インナーは暗めで大人っぽく。</p>
+          </div>
+        </article>
+
+        <article class="card" data-category="street">
+          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="card-body">
+            <div class="tags"><span class="tag hot">street</span><span class="tag">outer</span></div>
+            <h3>フーディ + ワイドパンツ</h3>
+            <p>ボリュームを出す日は、足元をすっきりさせるのがコツ。黒スニーカーで統一感を作れます。</p>
+          </div>
+        </article>
+
+        <article class="card" data-category="minimal">
+          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="card-body">
+            <div class="tags"><span class="tag clean">minimal</span><span class="tag">summer</span></div>
+            <h3>モノトーン半袖シャツ</h3>
+            <p>夏でも黒を軽く見せたいときに。素材はリネンや薄手コットンを選ぶと抜け感が出ます。</p>
+          </div>
+        </article>
+
+        <article class="card" data-category="smart">
+          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="card-body">
+            <div class="tags"><span class="tag clean">smart</span><span class="tag daily">office</span></div>
+            <h3>セットアップ + レザー小物</h3>
+            <p>ビジネスにも休日にも寄せられる万能型。バッグやベルトで質感を足すと完成度が上がります。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="lookbook">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Lookbook</p>
+          <h2>雰囲気で選ぶ</h2>
+        </div>
+        <p>服単体ではなく、場面に合わせた印象で選ぶと失敗しにくくなります。</p>
+      </div>
+
+      <div class="lookbook">
+        <article class="card">
+          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1520975682031-a5a390a0f2f7?auto=format&fit=crop&w=1000&q=80');"></div>
+          <div class="card-body">
+            <div class="tags"><span class="tag daily">weekend</span><span class="tag hot">black</span></div>
+            <h3>休日はリラックス感を強める</h3>
+            <p>トップスに余白を作り、パンツか靴で引き締める。楽だけどだらしなく見えないバランスです。</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1513267048331-5611cad62e41?auto=format&fit=crop&w=1000&q=80');"></div>
+          <div class="card-body">
+            <div class="tags"><span class="tag clean">night</span><span class="tag">city</span></div>
+            <h3>夜の外出は素材で差を出す</h3>
+            <p>黒の中でも、ウール、レザー、ナイロンを混ぜると立体感が出ます。アクセサリーは控えめで十分。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="guide">
+      <div class="guide">
+        <div class="guide-image" role="img" aria-label="メンズ服のディテール"></div>
+        <div class="guide-copy">
+          <p class="eyebrow">Style guide</p>
+          <h2>黒基調をかっこよく見せる3つのルール</h2>
+          <ul>
+            <li>上下どちらかにゆとりを作り、全身を細くしすぎない。</li>
+            <li>黒、白、グレーに1色だけアクセントを足す。</li>
+            <li>靴、バッグ、時計などの小物で素材感を足す。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stylist">
+      <div class="stylist">
+        <div class="stylist-copy">
+          <p class="eyebrow">AI Stylist</p>
+          <h2>服選びをAIに相談</h2>
+          <p>身長、雰囲気、予定、手持ちの服を入れると、コーデの方向性を提案します。API未設定でも簡易提案が動きます。</p>
+        </div>
+        <form class="stylist-form" id="stylistForm">
+          <div class="form-row">
+            <select id="sceneInput" aria-label="予定">
+              <option value="休日">休日</option>
+              <option value="デート">デート</option>
+              <option value="通学">通学</option>
+              <option value="仕事">仕事</option>
+            </select>
+            <select id="tasteInput" aria-label="好み">
+              <option value="黒基調">黒基調</option>
+              <option value="ストリート">ストリート</option>
+              <option value="ミニマル">ミニマル</option>
+              <option value="きれいめ">きれいめ</option>
+            </select>
+          </div>
+          <textarea id="stylePrompt" placeholder="例: 黒パンツと白Tを持っています。夏に使えるコーデを教えて"></textarea>
+          <button class="primary" type="submit" id="askStylist">提案してもらう</button>
+          <div class="ai-output" id="stylistOutput">予定や好みを入力すると、コーデ提案を表示します。</div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      BLACK THREAD / Men's fashion introduction site
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
