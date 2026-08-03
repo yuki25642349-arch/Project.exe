@@ -182,3 +182,11 @@
     border-right-color: var(--border);
   }
 }
+h1 {
+  color: blue;
+}
+button {
+  
+  padding: 10px;
+
+}
