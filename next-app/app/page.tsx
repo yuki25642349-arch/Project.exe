@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Image from "next/image";
 type QiitaResponse = {
   id: string;
   title: string;
@@ -16,7 +16,12 @@ export default async function Home() {
       },
     }
   );
-  return responce.data;
+  return responce.data.map((item) => ({
+    id: item.id,
+    title: item.title,
+    url: item.url,
+    image: "https://pbs.twimg.com/media/HO20vHPaQAAvf4i?format=jpg&name=medium",
+  })); 
 };
 const qiitaItems = await getQiitaItems();
   return(
@@ -25,6 +30,7 @@ const qiitaItems = await getQiitaItems();
       <ul>
         {qiitaItems.map((item) => (
           <li key={item.id}>
+            <Image src={item.image} width={100} height={100} alt="" />
             <a href={item.url} target="_blank" rel="noopener noreferrer">
               {item.title}
             </a>
