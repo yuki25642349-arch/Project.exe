@@ -7,7 +7,7 @@ async function BlogDetail({params}: { params: Params }) {
     return (
         <div>
             <h1>Blog Detail Page</h1>
-            <p>ID: {id}</p>
+            <p>ID: {id} </p>
         </div>
     );
 }   
