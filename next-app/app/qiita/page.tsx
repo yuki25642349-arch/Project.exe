@@ -18,12 +18,13 @@ const qiita = () => {
     return response.data
   }
   useEffect(() => {
-    fetchQiitaItems().then((items) => setQiitaItems(items.map((item) => ({
-      id: item.id,
-      title: item.title,
-      url: item.url,
-      image: "https://pbs.twimg.com/media/HO20vHPaQAAvf4i?format=jpg&name=medium",
-    }))));
+    fetchQiitaItems().then((items) =>
+      setQiitaItems(items.map((item) => ({
+        id: item.id,
+        title: item.title,
+        url: item.url,
+        image: "https://pbs.twimg.com/media/HO20vHPaQAAvf4i?format=jpg&name=medium",
+      }))));
   }, [])
   return (
     <div>
