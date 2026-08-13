@@ -3,6 +3,8 @@
 import { QiitaResponse } from "@/domain/Article";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Image from "next/image";
+
 const qiita = () => {
   const [qiitaItems, setQiitaItems] = useState<QiitaResponse[]>([]);
 
@@ -15,11 +17,13 @@ const qiita = () => {
         },
       }
     );
+
     return response.data
   }
   useEffect(() => {
     fetchQiitaItems().then((items) =>
-      setQiitaItems(items.map((item) => ({
+      setQiitaItems(
+        items.map((item) => ({
         id: item.id,
         title: item.title,
         url: item.url,
@@ -32,7 +36,7 @@ const qiita = () => {
       <ul>
         {qiitaItems.map((item) => (
           <li key={item.id}>
-            <img src={item.image} width={100} height={100} alt="" />
+            <Image src={item.image} width={100} height={100} alt="" />
             <a href={item.url} target="_blank" rel="noopener noreferrer">
               {item.title}
             </a>

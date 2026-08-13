@@ -28,7 +28,7 @@ export default async function Home() {
       }
     }
     );
-
+    console.log("MicroCMS API:", responce.data);
     return responce.data.contents.map((item) => ({
       id: item.id,
       title: item.title,
