@@ -1,3 +1,4 @@
+"use cache"
 import axios from "axios";
 import { MicrocmsResponse } from "@/domain/Article";
 import Image from "next/image";
@@ -17,7 +18,9 @@ const Blogs = async () => {
             image: item.eyecatch.url
         }));
     }
+    
     const blogs = await getBlogs();
+    
     return (
         <div>
             <h1>Blogs Page</h1>

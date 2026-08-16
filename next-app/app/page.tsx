@@ -1,59 +1,26 @@
 import { MicrocmsResponse, QiitaResponse } from "@/domain/Article";
 import axios from "axios";
 import Image from "next/image";
+import { Suspense } from "react";
 
-export default async function Home() {
-  const getQiitaItems = async () => {
-    const responce = await axios.get<QiitaResponse[]>(
-      "https://qiita.com/api/v2/authenticated_user/items",
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.QIITA_API_KEY}`
-        },
-      }
-    );
-    return responce.data.map((item) => ({
-      id: item.id,
-      title: item.title,
-      url: item.url,
-      image: "https://pbs.twimg.com/media/HO20vHPaQAAvf4i?format=jpg&name=medium",
-    }));
-  };
-
-  const getMicroCMSItems = async () => {
-    const responce = await axios.get<MicrocmsResponse>(
-      "https://projectexe.microcms.io/api/v1/blogs", {
+async function QiitaArticles() {
+  const response = await axios.get<QiitaResponse[]>(
+    "https://qiita.com/api/v2/authenticated_user/items",
+    {
       headers: {
-        "X-MICROCMS-API-KEY": process.env.MICROCMS_API_KEY,
+        Authorization: `Bearer ${process.env.QIITA_API_KEY}`
       }
     }
-    );
-    console.log("MicroCMS API:", responce.data);
-    return responce.data.contents.map((item) => ({
-      id: item.id,
-      title: item.title,
-      url: `/blogs/${item.id}`,
-      image: item.eyecatch.url
-    }));
-  };
-
-  const qiitaItems = await getQiitaItems();
-  const microCMSItems = await getMicroCMSItems();
+  );
+  const items = response.data.map((item) => ({
+    id: item.id,
+    title: item.title,
+    url: item.url,
+    image: "https://pbs.twimg.com/media/HO20vHPaQAAvf4i?format=jpg&name=medium",
+  }));
   return (
-    <div>
-      <h1>Welcome to Next.js!</h1>
-      <ul>
-        {qiitaItems.map((item) => (
-          <li key={item.id}>
-            <Image src={item.image} width={100} height={100} alt="" />
-            <a href={item.url} target="_blank" rel="noopener noreferrer">
-              {item.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {microCMSItems.map((item) => (
+    <ul>
+      {items.map((item) => (
           <li key={item.id}>
             <Image src={item.image} width={100} height={100} alt="" />
             <a href={item.url}>
@@ -61,7 +28,57 @@ export default async function Home() {
             </a>
           </li>
         ))}
-      </ul>
+        
+        </ul> 
+  )
+}
+
+async function MicroCMSArticles() {
+  const response = await axios.get<MicrocmsResponse>(
+    "https://projectexe.microcms.io/api/v1/blogs", {
+      headers: {
+        "X-MICROCMS-API-KEY": process.env.MICROCMS_API_KEY,
+      }
+    }
+  );
+  const items = response.data.contents.map((item) => ({
+    id: item.id,
+    title: item.title,
+    url: `/blogs/${item.id}`,
+    image: item.eyecatch.url
+  }));
+  return (
+    <ul>
+      {items.map((item) => (
+          <li key={item.id}>
+            <Image src={item.image} width={100} height={100} alt="" />
+            <a href={item.url}>
+              {item.title}
+            </a>
+          </li>
+        ))}
+        
+        </ul> 
+  )
+}
+
+export default function Home() {
+
+  return (
+    <div>
+      <h1>Welcome to Next.js!</h1>
+      <h2>
+        Qiita 記事
+      </h2>
+      <Suspense fallback={<div>Loading ...</div>}>
+        <QiitaArticles />
+        </Suspense>
+      <h2>
+        MicroCMS 記事
+      </h2>
+      <Suspense fallback={<div>Loading ...</div>}>
+      <MicroCMSArticles />
+      </Suspense>
     </div>
   );
 }
