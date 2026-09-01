@@ -1,7 +1,47 @@
+"use client";
+
+import { useEffect } from "react";
+
 export default function Home() {
+  useEffect(() => {
+    const elements =
+      document.querySelectorAll<HTMLElement>(".reveal");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const element = entry.target as HTMLElement;
+
+          if (entry.isIntersecting) {
+            // アニメーションをリセット
+            element.classList.remove("active");
+
+            // ブラウザに再描画させてアニメーションを再実行
+            void element.offsetWidth;
+
+            element.classList.add("active");
+          } else {
+            // 画面外に出たらリセット
+            element.classList.remove("active");
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main>
-      {/* Header */}
+      {/* ==================== HEADER ==================== */}
+
       <header>
         <div>MY PORTFOLIO</div>
 
@@ -13,12 +53,13 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* Hero */}
+      {/* ==================== HERO ==================== */}
+
       <section>
         <div>
           <p>WEB APPLICATION DEVELOPER</p>
 
-          <h1>
+          <h1 className="reveal">
             I BUILD
             <br />
             <span>WEB</span>
@@ -44,12 +85,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About */}
+      {/* ==================== ABOUT ==================== */}
+
       <section id="about">
         <div>
           <p>01 — ABOUT</p>
 
-          <h2>
+          <h2 className="reveal">
             TURNING
             <br />
             <span>IDEAS</span>
@@ -77,11 +119,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills */}
+      {/* ==================== SKILLS ==================== */}
+
       <section id="skills">
         <div>
           <p>02 — SKILLS</p>
-          <h2>TECH<br />STACK</h2>
+
+          <h2 className="reveal">
+            TECH
+            <br />
+            STACK
+          </h2>
         </div>
 
         <div>
@@ -111,12 +159,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects */}
+      {/* ==================== PROJECTS ==================== */}
+
       <section id="projects">
         <div>
           <p>03 — SELECTED WORKS</p>
 
-          <h2>
+          <h2 className="reveal">
             MY
             <br />
             PROJECTS
@@ -126,36 +175,46 @@ export default function Home() {
         <div>
           <article>
             <span>01</span>
+
             <h3>PROJECT ONE</h3>
+
             <p>Web Application</p>
             <p>React / Next.js / API</p>
+
             <button>VIEW PROJECT →</button>
           </article>
 
           <article>
             <span>02</span>
+
             <h3>PROJECT TWO</h3>
+
             <p>Web Application</p>
             <p>Laravel / PHP / MySQL</p>
+
             <button>VIEW PROJECT →</button>
           </article>
 
           <article>
             <span>03</span>
+
             <h3>PROJECT THREE</h3>
+
             <p>AI Application</p>
             <p>Python / AI / API</p>
+
             <button>VIEW PROJECT →</button>
           </article>
         </div>
       </section>
 
-      {/* Development Log */}
+      {/* ==================== DEVELOPMENT LOG ==================== */}
+
       <section>
         <div>
           <p>04 — DEVELOPMENT LOG</p>
 
-          <h2>
+          <h2 className="reveal">
             ALWAYS
             <br />
             <span>LEARNING.</span>
@@ -165,7 +224,9 @@ export default function Home() {
         <div>
           <article>
             <span>2026.08</span>
+
             <h3>React / Next.js</h3>
+
             <p>
               コンポーネント設計やAPI連携、
               Server Componentsについて学習。
@@ -174,7 +235,9 @@ export default function Home() {
 
           <article>
             <span>2026.07</span>
+
             <h3>JavaScript</h3>
+
             <p>
               非同期処理、Promise、API通信などを学習。
             </p>
@@ -182,7 +245,9 @@ export default function Home() {
 
           <article>
             <span>2026.06</span>
+
             <h3>Web Development</h3>
+
             <p>
               HTML / CSS / JavaScriptを使った
               Webアプリケーション開発を開始。
@@ -191,12 +256,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
+      {/* ==================== CONTACT ==================== */}
+
       <section id="contact">
         <p>05 — CONTACT</p>
 
-        <h2>
-          LET'S
+        <h2 className="reveal">
+          LET&apos;S
           <br />
           BUILD
           <br />
@@ -206,7 +272,8 @@ export default function Home() {
         <button>CONTACT ME →</button>
       </section>
 
-      {/* Footer */}
+      {/* ==================== FOOTER ==================== */}
+
       <footer>
         <p>© 2026 MY PORTFOLIO</p>
         <p>WEB APPLICATION DEVELOPER</p>
@@ -214,3 +281,4 @@ export default function Home() {
     </main>
   );
 }
+
