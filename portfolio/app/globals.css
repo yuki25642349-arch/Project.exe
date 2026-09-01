@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* ==================== VARIABLES ==================== */
+
 :root {
   --background: #080808;
   --foreground: #f5f5f5;
@@ -8,11 +10,7 @@
   --border: #292929;
 }
 
-body{
-  margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-}
+/* ==================== RESET ==================== */
 
 * {
   box-sizing: border-box;
@@ -29,12 +27,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/*HEADER*/
+/* ==================== HEADER ==================== */
 
 header {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
+
   width: 100%;
   height: 80px;
 
@@ -48,8 +48,6 @@ header {
 
   background: rgba(8, 8, 8, 0.8);
   backdrop-filter: blur(10px);
-
-  z-index: 100;
 }
 
 header > div {
@@ -78,10 +76,11 @@ nav a:hover {
   opacity: 0.5;
 }
 
-/*COMMON*/
+/* ==================== COMMON ==================== */
 
 section {
   min-height: 100vh;
+
   padding: 140px 8vw;
 
   border-bottom: 1px solid var(--border);
@@ -95,7 +94,7 @@ section > div > p:first-child {
   letter-spacing: 0.2em;
 }
 
-/*HERO*/
+/* ==================== HERO ==================== */
 
 section:first-of-type {
   min-height: 100vh;
@@ -137,7 +136,7 @@ section:first-of-type button {
   margin-right: 10px;
 }
 
-/*BUTTON*/
+/* ==================== BUTTON ==================== */
 
 button {
   padding: 16px 28px;
@@ -166,11 +165,13 @@ button:hover {
   transform: translateY(-4px);
 }
 
-/*ABOUT*/
+/* ==================== ABOUT ==================== */
 
 #about {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 10vw;
 
   align-items: center;
@@ -203,10 +204,11 @@ h2 span {
   margin-bottom: 30px;
 }
 
-/*SKILLS*/
+/* ==================== SKILLS ==================== */
 
 #skills {
   display: grid;
+
   grid-template-columns: 0.8fr 1.2fr;
 
   gap: 10vw;
@@ -214,10 +216,10 @@ h2 span {
 
 #skills > div:last-child {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 }
 
-#skills article,
 #skills > div:last-child > div {
   padding: 40px;
 
@@ -249,10 +251,11 @@ h3 {
   line-height: 1.8;
 }
 
-/*PROJECTS*/
+/* ==================== PROJECTS ==================== */
 
 #projects {
   display: grid;
+
   grid-template-columns: 0.8fr 1.2fr;
 
   gap: 10vw;
@@ -297,10 +300,11 @@ h3 {
   margin-top: 15px;
 }
 
-/*DEVELOPMENT LOG*/
+/* ==================== DEVELOPMENT LOG ==================== */
 
 section:nth-of-type(4) {
   display: grid;
+
   grid-template-columns: 0.8fr 1.2fr;
 
   gap: 10vw;
@@ -314,6 +318,7 @@ section:nth-of-type(4) > div:last-child article {
 
 section:nth-of-type(4) article span {
   color: var(--muted);
+
   font-size: 12px;
   letter-spacing: 0.1em;
 }
@@ -326,10 +331,11 @@ section:nth-of-type(4) article p {
   max-width: 600px;
 
   color: var(--muted);
+
   line-height: 1.8;
 }
 
-/*CONTACT*/
+/* ==================== CONTACT ==================== */
 
 #contact {
   min-height: 90vh;
@@ -340,25 +346,25 @@ section:nth-of-type(4) article p {
 }
 
 #contact h2 {
-  font-size: clamp(70px, 12vw, 190px);
-
   margin: 30px 0 60px;
+
+  font-size: clamp(70px, 12vw, 190px);
 }
 
 #contact button {
   width: fit-content;
 }
 
-/*FOOTER*/
+/* ==================== FOOTER ==================== */
 
 footer {
   min-height: 100px;
 
-  padding: 40px 8vw;
-
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  padding: 40px 8vw;
 
   color: var(--muted);
 
@@ -366,9 +372,43 @@ footer {
   letter-spacing: 0.15em;
 }
 
-/*MOBILE*/
+/* ==================== TEXT REVEAL ==================== */
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+
+    transform: translateY(60px);
+
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    filter: blur(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+
+  transform: translateY(60px);
+
+  filter: blur(10px);
+}
+
+.reveal.active {
+  animation: textReveal 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ==================== MOBILE ==================== */
 
 @media (max-width: 768px) {
+  /* Header */
+
   header {
     height: 65px;
     padding: 0 20px;
@@ -378,6 +418,8 @@ footer {
     display: none;
   }
 
+  /* Section */
+
   section {
     padding: 120px 25px;
   }
@@ -385,6 +427,8 @@ footer {
   section:first-of-type {
     padding-top: 150px;
   }
+
+  /* Typography */
 
   h1 {
     font-size: 18vw;
@@ -394,31 +438,44 @@ footer {
     font-size: 17vw;
   }
 
+  /* Layout */
+
   #about,
   #skills,
   #projects,
   section:nth-of-type(4) {
     grid-template-columns: 1fr;
+
     gap: 60px;
   }
+
+  /* Skills */
 
   #skills > div:last-child {
     grid-template-columns: 1fr;
   }
 
+  /* About */
+
   #about > div:last-child p {
     font-size: 16px;
   }
+
+  /* Projects */
 
   #projects article h3 {
     font-size: 12vw;
   }
 
-  footer {
-    padding: 30px 25px;
+  /* Footer */
 
+  footer {
     flex-direction: column;
     align-items: flex-start;
+
     gap: 10px;
+
+    padding: 30px 25px;
   }
 }
+
