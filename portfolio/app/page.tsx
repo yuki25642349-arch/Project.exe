@@ -5,7 +5,9 @@ import { useEffect } from "react";
 export default function Home() {
   useEffect(() => {
     const elements =
-      document.querySelectorAll<HTMLElement>(".reveal");
+  document.querySelectorAll<HTMLElement>(
+    ".reveal, .reveal-left, .reveal-right"
+  );
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -92,11 +94,11 @@ export default function Home() {
           <p>01 — ABOUT</p>
 
           <h2 className="reveal">
-            TURNING
+            学びを
             <br />
-            <span>IDEAS</span>
+            <span>積み重ね、</span>
             <br />
-            INTO PRODUCTS.
+            カタチにする。
           </h2>
         </div>
 
@@ -109,7 +111,7 @@ export default function Home() {
           <p>
             フロントエンドからバックエンドまで幅広い技術に触れ、
             ユーザーにとって使いやすく、実際に価値を提供できる
-            アプリケーションの開発を目指しています。
+            アプリケーションの開発を目指します。
           </p>
 
           <p>
@@ -126,9 +128,9 @@ export default function Home() {
           <p>02 — SKILLS</p>
 
           <h2 className="reveal">
-            TECH
+            技術
             <br />
-            STACK
+            スタック
           </h2>
         </div>
 
@@ -222,7 +224,7 @@ export default function Home() {
         </div>
 
         <div>
-          <article>
+          <article className="reveal-right">
             <span>2026.08</span>
 
             <h3>React / Next.js</h3>
@@ -233,7 +235,7 @@ export default function Home() {
             </p>
           </article>
 
-          <article>
+          <article className="reveal-left">
             <span>2026.07</span>
 
             <h3>JavaScript</h3>
@@ -243,7 +245,7 @@ export default function Home() {
             </p>
           </article>
 
-          <article>
+          <article className="reveal-right">
             <span>2026.06</span>
 
             <h3>Web Development</h3>
