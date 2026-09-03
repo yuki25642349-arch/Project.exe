@@ -1,5 +1,26 @@
 @import "tailwindcss";
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+/* ==================== FIXED BACKGROUND ==================== */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  background-image: url("/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.2;
+}
 /* ==================== VARIABLES ==================== */
 
 :root {
