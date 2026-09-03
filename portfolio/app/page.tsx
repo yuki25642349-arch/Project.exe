@@ -64,7 +64,7 @@ export default function Home() {
             <br />
             <span>学びを</span>
             <br />
-            大切にするエンジニア
+            大切にする。
           </h1>
 
           <p>
