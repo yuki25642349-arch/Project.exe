@@ -60,11 +60,11 @@ export default function Home() {
           <p>WEB APPLICATION DEVELOPER</p>
 
           <h1 className="reveal">
-            I BUILD
+            一つ一つの
             <br />
-            <span>WEB</span>
+            <span>学びを</span>
             <br />
-            EXPERIENCES.
+            大切にするエンジニア
           </h1>
 
           <p>
