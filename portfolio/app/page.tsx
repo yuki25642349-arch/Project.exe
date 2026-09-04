@@ -104,18 +104,18 @@ export default function Home() {
         </div>
 
         <div>
-          <p>
+          <p className="reveal">
             私はWebアプリケーション開発を中心に学んでいる
             エンジニアです。
           </p>
 
-          <p>
+          <p className="reveal">
             フロントエンドからバックエンドまで幅広い技術に触れ、
             ユーザーにとって使いやすく、実際に価値を提供できる
             アプリケーションの開発を目指します。
           </p>
 
-          <p>
+          <p className="reveal">
             現在はReact / Next.js / JavaScriptを中心に、
             モダンなWeb開発について学習しています。
           </p>
