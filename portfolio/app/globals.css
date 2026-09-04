@@ -448,34 +448,31 @@ footer {
 /* ==================== ABOUT TEXT ==================== */
 
 /* 1つ目：下から */
-#about > div:last-child p:nth-child(1) {
-  transform: translateY(60px);
+#about > div:last-child p.reveal:nth-child(1) {
+  transform: translateY(-60px);
 }
 
 /* 2つ目：左から */
-#about > div:last-child p:nth-child(2) {
-  transform: translateX(-60px);
+#about > div:last-child p.reveal:nth-child(2) {
+  transform: translateX(60px);
 }
 
 /* 3つ目：上から */
-#about > div:last-child p:nth-child(3) {
-  transform: translateY(-60px);
+#about > div:last-child p.reveal:nth-child(3) {
+  transform: translateY(60px);
 }
 
 
 /* ==================== ABOUT TEXT DELAY ==================== */
 
-/* 1つ目 */
 #about > div:last-child p:nth-child(1).active {
   animation-delay: 0s;
 }
 
-/* 2つ目 */
 #about > div:last-child p:nth-child(2).active {
   animation-delay: 0.25s;
 }
 
-/* 3つ目 */
 #about > div:last-child p:nth-child(3).active {
   animation-delay: 0.5s;
 }
