@@ -1,6 +1,6 @@
-import { Yuji_Boku } from "next/font/google";
+import { Shippori_Mincho } from "next/font/google";
 
-export const yujiBoku = Yuji_Boku({
-  weight: "400",
+export const shipporiMincho = Shippori_Mincho({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });

@@ -1,5 +1,5 @@
 "use client";
-import { yujiBoku } from "./fonts";
+import { shipporiMincho } from "./fonts";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -62,7 +62,8 @@ export default function Home() {
         <div>
           <p>WEB APPLICATION DEVELOPER</p>
 
-          <h1 className={`reveal ${yujiBoku.className}`}>
+          <h1 className={`reveal ${shipporiMincho.className}`}>
+
             一つ一つの
             <br />
             <span>学びを</span>

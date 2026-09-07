@@ -141,8 +141,8 @@ section:first-of-type p {
 h1 {
   margin: 30px 0;
 
-  font-size: clamp(70px, 12vw, 180px);
-  line-height: 0.82;
+  font-size: clamp(70px, 9vw, 180px);
+  line-height: 1.0;
   letter-spacing: -0.06em;
   font-weight: 900;
 }
