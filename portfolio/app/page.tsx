@@ -1,13 +1,14 @@
+
 "use client";
-import { shipporiMincho } from "./fonts";
+
 import { useEffect } from "react";
+import { shipporiMincho } from "./fonts";
 
 export default function Home() {
   useEffect(() => {
-    const elements =
-  document.querySelectorAll<HTMLElement>(
-    ".reveal, .reveal-left, .reveal-right"
-  );
+    const elements = document.querySelectorAll<HTMLElement>(
+      ".reveal, .reveal-left, .reveal-right"
+    );
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,7 +42,6 @@ export default function Home() {
   }, []);
 
   return (
-    
     <main>
       {/* ==================== HEADER ==================== */}
 
@@ -63,7 +63,6 @@ export default function Home() {
           <p>WEB APPLICATION DEVELOPER</p>
 
           <h1 className={`reveal ${shipporiMincho.className}`}>
-
             一つ一つの
             <br />
             <span>学びを</span>
@@ -104,7 +103,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div>
+        <div className={shipporiMincho.className}>
           <p className="reveal">
             私はWebアプリケーション開発を中心に学んでいる
             エンジニアです。
@@ -129,14 +128,14 @@ export default function Home() {
         <div>
           <p>02 — SKILLS</p>
 
-          <h2 className="reveal">
+          <h2 className={`reveal ${shipporiMincho.className}`}>
             技術
             <br />
             スタック
           </h2>
         </div>
 
-        <div>
+        <div className={shipporiMincho.className}>
           <div>
             <span>01</span>
             <h3>FRONTEND</h3>
@@ -169,14 +168,14 @@ export default function Home() {
         <div>
           <p>03 — SELECTED WORKS</p>
 
-          <h2 className="reveal">
+          <h2 className={`reveal ${shipporiMincho.className}`}>
             MY
             <br />
             PROJECTS
           </h2>
         </div>
 
-        <div>
+        <div className={shipporiMincho.className}>
           <article>
             <span>01</span>
 
@@ -214,7 +213,7 @@ export default function Home() {
 
       {/* ==================== DEVELOPMENT LOG ==================== */}
 
-      <section>
+      <section className={shipporiMincho.className}>
         <div>
           <p>04 — DEVELOPMENT LOG</p>
 
@@ -262,7 +261,7 @@ export default function Home() {
 
       {/* ==================== CONTACT ==================== */}
 
-      <section id="contact">
+      <section className={shipporiMincho.className}>
         <p>05 — CONTACT</p>
 
         <h2 className="reveal">
