@@ -201,8 +201,8 @@ button:hover {
 h2 {
   margin: 20px 0;
 
-  font-size: clamp(60px, 9vw, 140px);
-  line-height: 0.85;
+  font-size: clamp(60px, 9vw, 110px);
+  line-height: 1.0;
   letter-spacing: -0.06em;
   font-weight: 900;
 }

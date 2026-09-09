@@ -95,7 +95,7 @@ export default function Home() {
         <div>
           <p>01 — ABOUT</p>
 
-          <h2 className="reveal">
+          <h2 className={`reveal ${shipporiMincho.className}`}>
             学びを
             <br />
             <span>積み重ね、</span>
