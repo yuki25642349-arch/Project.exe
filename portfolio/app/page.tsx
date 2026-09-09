@@ -58,11 +58,11 @@ export default function Home() {
 
       {/* ==================== HERO ==================== */}
 
-      <section>
+      <section className={`reveal ${shipporiMincho.className}`}>
         <div>
           <p>WEB APPLICATION DEVELOPER</p>
 
-          <h1 className={`reveal ${shipporiMincho.className}`}>
+          <h1 >
             一つ一つの
             <br />
             <span>学びを</span>
