@@ -14,10 +14,10 @@ body {
 
 .calendar-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-
-  margin-bottom: 60px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 28px;
+  margin-bottom: 40px;
 }
 
 .calendar-label {
@@ -141,13 +141,11 @@ body {
   border-top: 1px solid #222;
 }
 
+
 .calendar-day {
   min-width: 0;
   overflow: hidden;
-}
-
-.calendar-day {
-  min-height: 65px;
+  height: 100px;
 
   padding: 15px;
 
@@ -193,42 +191,6 @@ body {
   letter-spacing: 0.1em;
 
   color: #aaa;
-}
-
-.day-modal input,
-.day-modal textarea {
-  width: 100%;
-  padding: 15px;
-  border: 1px solid #333;
-  background: #080808;
-  color: white;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.day-modal textarea {
-  min-height: 180px;
-
-  resize: vertical;
-}
-
-.close-button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-.save-button {
-  padding: 14px;
-  background: white;
-  color: black;
-  border: none;
-  cursor: pointer;
 }
 
 @keyframes modalOpen {
@@ -333,7 +295,7 @@ body {
 .day-modal input,
 .day-modal textarea {
   width: 100%;
-
+  box-sizing: border-box;
   padding: 14px 16px;
   margin-bottom: 16px;
 
@@ -443,21 +405,20 @@ body {
 .search-hidden {
   opacity: 0.15;
 }
-.calendar-header {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  margin-bottom: 40px;
-}
 
 .calendar-header-top {
+  width: 100%;
+
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
+
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
 .search-box {
-  width: 100%;
+  width: 93%;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -500,4 +461,12 @@ body {
 
 .search-box input::placeholder {
   color: #555;
+}
+.calendar-header-top h1 {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.month-selector {
+  flex-shrink: 0;
 }
