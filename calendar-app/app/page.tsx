@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
-
+  const [searchText, setSearchText] = useState("");
   const [title, setTitle] = useState("");
   const [memo, setMemo] = useState("");
   const [goal, setGoal] = useState("");
@@ -105,6 +105,12 @@ export default function Home() {
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <header className="calendar-header">
+        <input
+          type="text"
+          placeholder="タイトルを検索"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
         <h1>Calendar</h1>
 
         <div className="month-selector">
