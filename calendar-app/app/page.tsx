@@ -1,69 +1,206 @@
-import Image from "next/image";
+"use client";
 
+import { shipporiMincho } from "./fonts";
+import { useEffect, useState } from "react";
 export default function Home() {
+  
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+
+  const [title, setTitle] = useState("");
+  const [memo, setMemo] = useState("");
+  const [goal, setGoal] = useState("");
+  useEffect(() => {
+  if (selectedDay !== null) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [selectedDay]);
+  
+  const [records, setRecords] = useState<
+  Record<number, { title: string; memo: string; goal: string }>
+  >({});
+  const saveRecord = () => {
+  if (selectedDay === null) return;
+
+  setRecords((prev) => ({
+  ...prev,
+  [selectedDay]: {
+    title,
+    memo,
+    goal,
+  },
+}));
+
+  setSelectedDay(null);
+  setTitle("");
+  setMemo("");
+  setGoal("");
+};
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const days = Array.from(
+    { length: daysInMonth },
+    (_, index) => index + 1
+  );
+
+  const previousMonth = () => {
+    setCurrentDate(new Date(year, month - 1, 1));
+  };
+
+  const nextMonth = () => {
+    setCurrentDate(new Date(year, month + 1, 1));
+  };
+  const deleteRecord = () => {
+  if (selectedDay === null) return;
+
+  const isConfirmed = window.confirm(
+    `${year}年${month + 1}月${selectedDay}日の記録を削除しますか？`
+  );
+
+  if (!isConfirmed) return;
+
+  setRecords((prev) => {
+    const newRecords = { ...prev };
+
+    delete newRecords[selectedDay];
+
+    return newRecords;
+  });
+
+  setSelectedDay(null);
+};
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className={`calendar-page ${shipporiMincho.className}`}>
+
+      <header className="calendar-header">
+        <h1>Calendar</h1>
+
+        <div className="month-selector">
+        <button
+          className="month-button"
+          onClick={previousMonth}
+        >
+          <span className="arrow">←</span>
+          <span className="button-text">PREV</span>
+        </button>
+
+        <h2>
+          <span className="year">{year}</span>
+          <span className="slash"> / </span>
+          <span className="month">{String(month + 1).padStart(2, "0")}</span>
+        </h2>
+
+        <button
+          className="month-button"
+          onClick={nextMonth}
+        >
+          <span className="button-text">NEXT</span>
+          <span className="arrow">→</span>
+        </button>
+      </div>
+
+      </header>
+
+      <div className="calendar-grid">
+        {days.map((day) => (
+      <div
+        className="calendar-day"
+        key={day}
+        onClick={() => setSelectedDay(day)}
+      >
+        <span>{day}</span>
+
+        {records[day] && (
+          <div className="record-preview">
+            <p>{records[day].title}</p>
+            <small>{records[day].memo}</small>
+          </div>
+        )}
+  </div>
+))}
+      </div>
+
+      {selectedDay !== null && (
+  <div className="modal-overlay">
+    <div className="day-modal">
+
+      <button
+        className="close-button"
+        onClick={() => setSelectedDay(null)}
+      >
+        ×
+      </button>
+
+      <p className="modal-label">DAILY RECORD</p>
+
+      <h2 className="modal-date">
+        {year} / {month + 1} / {selectedDay}
+      </h2>
+
+      <input
+        type="text"
+        placeholder="タイトルを入力"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
+      <div className="record-fields">
+
+        <div className="record-field">
+          <p className="input-label">やったこと</p>
+
+          <textarea
+            placeholder="今日やったことを入力"
+            value={memo}
+            onChange={(e) => setMemo(e.target.value)}
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div className="record-field">
+          <p className="input-label">この日までの目標</p>
+
+          <textarea
+            placeholder="この日までに達成したい目標を入力"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+          />
+  </div>
+
+</div>
+
+      <div className="modal-actions">
+        <button
+          className="save-button"
+          onClick={saveRecord}
+        >
+          保存
+        </button>
+
+        {records[selectedDay] && (
+          <button
+            className="delete-button"
+            onClick={deleteRecord}
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            削除
+          </button>
+        )}
+      </div>
+
     </div>
+  </div>
+)}
+      
+    </main>
   );
 }
