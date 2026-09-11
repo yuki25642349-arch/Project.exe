@@ -48,12 +48,12 @@ export default function Home() {
   const today = new Date();
 
   const isToday = (day: number) => {
-  return (
-    day === today.getDate() &&
-    month === today.getMonth() &&
-    year === today.getFullYear()
-  );
-};
+    return (
+      day === today.getDate() &&
+      month === today.getMonth() &&
+      year === today.getFullYear()
+    );
+  };
 
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -87,31 +87,32 @@ export default function Home() {
     setSelectedDay(null);
   };
   const openDay = (day: number) => {
-  const record = records[day];
+    const record = records[day];
 
-  if (record) {
-    setTitle(record.title);
-    setMemo(record.memo);
-    setGoal(record.goal);
-  } else {
-    setTitle("");
-    setMemo("");
-    setGoal("");
-  }
+    if (record) {
+      setTitle(record.title);
+      setMemo(record.memo);
+      setGoal(record.goal);
+    } else {
+      setTitle("");
+      setMemo("");
+      setGoal("");
+    }
 
-  setSelectedDay(day);
-
-};
+    setSelectedDay(day);
+  };
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <header className="calendar-header">
+        
+        <h1>Calendar</h1>
+
         <input
           type="text"
           placeholder="タイトルを検索"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <h1>Calendar</h1>
 
         <div className="month-selector">
           <button className="month-button" onClick={previousMonth}>
@@ -145,22 +146,33 @@ export default function Home() {
           <div className="calendar-day empty-day" key={`empty-${index}`} />
         ))}
 
-        {days.map((day) => (
-          <div
-            className={`calendar-day ${isToday(day) ? "today" : ""}`}
-            key={day}
-            onClick={() => openDay(day)}
-          >
-            <span>{day}</span>
+        {days.map((day) => {
+          const record = records[day];
 
-            {records[day] && (
-              <div className="record-preview">
-                <p>{records[day].title}</p>
-                <small>{records[day].memo}</small>
-              </div>
-            )}
-          </div>
-        ))}
+          const isMatch =
+            searchText === "" ||
+            record?.title.toLowerCase().includes(searchText.toLowerCase());
+
+          return (
+            <div
+              className={`calendar-day
+        ${isToday(day) ? "today" : ""}
+        ${!isMatch ? "search-hidden" : ""}
+      `}
+              key={day}
+              onClick={() => openDay(day)}
+            >
+              <span>{day}</span>
+
+              {record && (
+                <div className="record-preview">
+                  <p>{record.title}</p>
+                  <small>{record.memo}</small>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {selectedDay !== null && (
