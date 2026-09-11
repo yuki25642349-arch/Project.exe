@@ -104,34 +104,41 @@ export default function Home() {
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <header className="calendar-header">
-        
-        <h1>Calendar</h1>
+  <div className="calendar-header-top">
+    <h1>Calendar</h1>
 
-        <input
-          type="text"
-          placeholder="タイトルを検索"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
+    <div className="month-selector">
+      <button className="month-button" onClick={previousMonth}>
+        <span className="arrow">←</span>
+        <span className="button-text">PREV</span>
+      </button>
 
-        <div className="month-selector">
-          <button className="month-button" onClick={previousMonth}>
-            <span className="arrow">←</span>
-            <span className="button-text">PREV</span>
-          </button>
+      <h2>
+        <span className="year">{year}</span>
+        <span className="slash"> / </span>
+        <span className="month">
+          {String(month + 1).padStart(2, "0")}
+        </span>
+      </h2>
 
-          <h2>
-            <span className="year">{year}</span>
-            <span className="slash"> / </span>
-            <span className="month">{String(month + 1).padStart(2, "0")}</span>
-          </h2>
+      <button className="month-button" onClick={nextMonth}>
+        <span className="button-text">NEXT</span>
+        <span className="arrow">→</span>
+      </button>
+    </div>
+  </div>
 
-          <button className="month-button" onClick={nextMonth}>
-            <span className="button-text">NEXT</span>
-            <span className="arrow">→</span>
-          </button>
-        </div>
-      </header>
+  <div className="search-box">
+    <span className="search-icon">⌕</span>
+
+    <input
+      type="text"
+      placeholder="タイトルを検索"
+      value={searchText}
+      onChange={(e) => setSearchText(e.target.value)}
+    />
+  </div>
+</header>
       <div className="weekdays">
         <div>SUN</div>
         <div>MON</div>
