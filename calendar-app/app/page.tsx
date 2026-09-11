@@ -45,6 +45,16 @@ export default function Home() {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
+  const today = new Date();
+
+  const isToday = (day: number) => {
+  return (
+    day === today.getDate() &&
+    month === today.getMonth() &&
+    year === today.getFullYear()
+  );
+};
+
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -76,6 +86,22 @@ export default function Home() {
 
     setSelectedDay(null);
   };
+  const openDay = (day: number) => {
+  const record = records[day];
+
+  if (record) {
+    setTitle(record.title);
+    setMemo(record.memo);
+    setGoal(record.goal);
+  } else {
+    setTitle("");
+    setMemo("");
+    setGoal("");
+  }
+
+  setSelectedDay(day);
+
+};
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <header className="calendar-header">
@@ -115,9 +141,9 @@ export default function Home() {
 
         {days.map((day) => (
           <div
-            className="calendar-day"
+            className={`calendar-day ${isToday(day) ? "today" : ""}`}
             key={day}
-            onClick={() => setSelectedDay(day)}
+            onClick={() => openDay(day)}
           >
             <span>{day}</span>
 

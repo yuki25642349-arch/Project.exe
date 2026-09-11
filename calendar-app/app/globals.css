@@ -123,12 +123,14 @@ body {
 }
 
 .weekdays div {
-  padding: 15px;
+  padding: 15px 0;
 
   color: #666;
 
   font-size: 11px;
   letter-spacing: 0.15em;
+
+  text-align: center;
 }
 
 .calendar-grid {
@@ -395,4 +397,18 @@ body {
 
 .delete-button:hover {
   background: rgba(255, 70, 70, 0.2);
+}
+.calendar-day.today span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  background: white;
+  color: black;
+
+  border-radius: 50%;
+  font-weight: 600;
 }
