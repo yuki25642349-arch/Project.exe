@@ -135,10 +135,15 @@ body {
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
 
   border-left: 1px solid #222;
   border-top: 1px solid #222;
+}
+
+.calendar-day {
+  min-width: 0;
+  overflow: hidden;
 }
 
 .calendar-day {
@@ -411,4 +416,27 @@ body {
 
   border-radius: 50%;
   font-weight: 600;
+}
+.record-preview {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.record-preview p,
+.record-preview small {
+  display: block;
+  width: max-content;
+
+  animation: record-scroll 8s linear infinite;
+}
+
+@keyframes record-scroll {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
 }
