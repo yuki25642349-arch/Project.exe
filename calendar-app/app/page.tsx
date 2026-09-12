@@ -22,14 +22,14 @@ export default function Home() {
   }, [selectedDay]);
 
   const [records, setRecords] = useState<
-    Record<number, { title: string; memo: string; goal: string }>
+    Record<string, { title: string; memo: string; goal: string }>
   >({});
   const saveRecord = () => {
     if (selectedDay === null) return;
 
     setRecords((prev) => ({
       ...prev,
-      [selectedDay]: {
+      [getDateKey(selectedDay)]: {
         title,
         memo,
         goal,
@@ -44,7 +44,9 @@ export default function Home() {
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
-
+  const getDateKey = (day: number) => {
+  return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+};
   const today = new Date();
 
   const isToday = (day: number) => {
@@ -79,7 +81,7 @@ export default function Home() {
     setRecords((prev) => {
       const newRecords = { ...prev };
 
-      delete newRecords[selectedDay];
+      delete newRecords[getDateKey(selectedDay)];
 
       return newRecords;
     });
@@ -87,7 +89,7 @@ export default function Home() {
     setSelectedDay(null);
   };
   const openDay = (day: number) => {
-    const record = records[day];
+    const record = records[getDateKey(day)];
 
     if (record) {
       setTitle(record.title);
@@ -154,7 +156,7 @@ export default function Home() {
         ))}
 
         {days.map((day) => {
-          const record = records[day];
+          const record = records[getDateKey(day)];
 
           const isMatch =
             searchText === "" ||
@@ -255,7 +257,7 @@ export default function Home() {
                 保存
               </button>
 
-              {records[selectedDay] && (
+              {records[getDateKey(selectedDay)] && (
                 <button className="delete-button" onClick={deleteRecord}>
                   削除
                 </button>
