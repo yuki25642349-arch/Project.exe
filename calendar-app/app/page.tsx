@@ -9,6 +9,7 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [memo, setMemo] = useState("");
   const [goal, setGoal] = useState("");
+
   useEffect(() => {
     if (selectedDay !== null) {
       document.body.style.overflow = "hidden";
@@ -24,6 +25,25 @@ export default function Home() {
   const [records, setRecords] = useState<
     Record<string, { title: string; memo: string; goal: string }>
   >({});
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  // 最初にlocalStorageから読み込む
+  useEffect(() => {
+    const savedRecords = localStorage.getItem("calendar-records");
+
+    if (savedRecords) {
+      setRecords(JSON.parse(savedRecords));
+    }
+
+    setIsLoaded(true);
+  }, []);
+
+  // recordsが変わったらlocalStorageに保存
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    localStorage.setItem("calendar-records", JSON.stringify(records));
+  }, [records, isLoaded]);
   const saveRecord = () => {
     if (selectedDay === null) return;
 
@@ -45,8 +65,8 @@ export default function Home() {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const getDateKey = (day: number) => {
-  return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-};
+    return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  };
   const today = new Date();
 
   const isToday = (day: number) => {
