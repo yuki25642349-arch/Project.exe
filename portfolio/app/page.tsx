@@ -1,13 +1,13 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import { shipporiMincho } from "./fonts";
 
 export default function Home() {
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>(
-      ".reveal, .reveal-left, .reveal-right"
+      ".reveal, .reveal-left, .reveal-right",
     );
 
     const observer = new IntersectionObserver(
@@ -31,7 +31,7 @@ export default function Home() {
       },
       {
         threshold: 0.2,
-      }
+      },
     );
 
     elements.forEach((element) => {
@@ -62,7 +62,7 @@ export default function Home() {
         <div>
           <p>WEB APPLICATION DEVELOPER</p>
 
-          <h1 >
+          <h1>
             一つ一つの
             <br />
             <span>学びを</span>
@@ -105,8 +105,7 @@ export default function Home() {
 
         <div className={shipporiMincho.className}>
           <p className="reveal">
-            私はWebアプリケーション開発を中心に学んでいる
-            エンジニアです。
+            私はWebアプリケーション開発を中心に学んでいる エンジニアです。
           </p>
 
           <p className="reveal">
@@ -165,6 +164,47 @@ export default function Home() {
       {/* ==================== PROJECTS ==================== */}
 
       <section id="projects">
+        {selectedProject === "calendar" && (
+          <div className="project-modal-overlay">
+            <div className="project-modal">
+              <button
+                className="project-modal-close"
+                onClick={() => setSelectedProject(null)}
+              >
+                ×
+              </button>
+
+              <span>PROJECT 01</span>
+
+              <h2>CALENDAR APP</h2>
+
+              <p>
+                日付ごとに予定やメモを保存できる カレンダーアプリケーション。
+              </p>
+
+              <div className="project-modal-tech">
+                <span>React</span>
+                <span>Next.js</span>
+                <span>TypeScript</span>
+                <span>localStorage</span>
+              </div>
+
+              <h3>FEATURES</h3>
+
+              <ul>
+                <li>月ごとのカレンダー表示</li>
+                <li>予定・メモの保存</li>
+                <li>モーダルからの予定入力</li>
+                <li>localStorageによるデータ保持</li>
+              </ul>
+
+              <div className="project-modal-links">
+                <button>GITHUB →</button>
+                <button>LIVE DEMO →</button>
+              </div>
+            </div>
+          </div>
+        )}
         <div>
           <p>03 — SELECTED WORKS</p>
 
@@ -181,14 +221,13 @@ export default function Home() {
 
             <h3>CALENDAR APP</h3>
 
-            <p>
-              日付ごとに予定やメモを保存できる
-              カレンダーアプリケーション。
-            </p>
+            <p>日付ごとに予定やメモを保存できる カレンダーアプリケーション。</p>
 
             <p>React / Next.js / TypeScript / localStorage</p>
 
-            <button>VIEW PROJECT →</button>
+            <button onClick={() => setSelectedProject("calendar")}>
+              VIEW PROJECT →
+            </button>
           </article>
 
           <article>
@@ -234,10 +273,7 @@ export default function Home() {
 
             <h3>React / Next.js</h3>
 
-            <p>
-              コンポーネント設計やAPI連携、
-              Server Componentsについて学習。
-            </p>
+            <p>コンポーネント設計やAPI連携、 Server Componentsについて学習。</p>
           </article>
 
           <article className="reveal-left">
@@ -245,9 +281,7 @@ export default function Home() {
 
             <h3>JavaScript</h3>
 
-            <p>
-              非同期処理、Promise、API通信などを学習。
-            </p>
+            <p>非同期処理、Promise、API通信などを学習。</p>
           </article>
 
           <article className="reveal-right">
@@ -256,8 +290,7 @@ export default function Home() {
             <h3>Web Development</h3>
 
             <p>
-              HTML / CSS / JavaScriptを使った
-              Webアプリケーション開発を開始。
+              HTML / CSS / JavaScriptを使った Webアプリケーション開発を開始。
             </p>
           </article>
         </div>
@@ -288,4 +321,3 @@ export default function Home() {
     </main>
   );
 }
-
