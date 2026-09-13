@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { shipporiMincho } from "./fonts";
 
 export default function Home() {
@@ -179,10 +179,14 @@ export default function Home() {
           <article>
             <span>01</span>
 
-            <h3>PROJECT ONE</h3>
+            <h3>CALENDAR APP</h3>
 
-            <p>Web Application</p>
-            <p>React / Next.js / API</p>
+            <p>
+              日付ごとに予定やメモを保存できる
+              カレンダーアプリケーション。
+            </p>
+
+            <p>React / Next.js / TypeScript / localStorage</p>
 
             <button>VIEW PROJECT →</button>
           </article>
