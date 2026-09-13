@@ -210,8 +210,21 @@ export default function Home() {
               </ul>
 
               <div className="project-modal-links">
-                <button>GITHUB →</button>
-                <button>LIVE DEMO →</button>
+                <a
+                  href="https://github.com/yuki25642349-arch/Project.exe/tree/main/calendar-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GITHUB →
+                </a>
+
+                <a
+                  href="ここに公開したサイトのURL"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LIVE DEMO →
+                </a>
               </div>
             </div>
           </div>
