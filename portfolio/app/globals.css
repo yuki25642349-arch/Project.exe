@@ -768,3 +768,115 @@ footer {
     filter: blur(8px);
   }
 }
+/* ==================== IMAGE PREVIEW ==================== */
+
+.project-modal-image {
+  cursor: zoom-in;
+}
+
+.image-preview-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  background: rgba(0, 0, 0, 0.92);
+
+  animation: imagePreviewFade 0.3s ease forwards;
+}
+
+.image-preview-content {
+  width: min(1400px, 95vw);
+
+  animation: imagePreviewOpen 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.image-preview-content img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  border: 1px solid var(--border);
+}
+
+.image-preview-close {
+  position: absolute;
+
+  top: 30px;
+  right: 30px;
+
+  width: 48px;
+  height: 48px;
+
+  padding: 0;
+
+  border-radius: 50%;
+
+  font-size: 24px;
+
+  z-index: 2100;
+}
+
+@keyframes imagePreviewFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes imagePreviewOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+/* ==================== IMAGE PREVIEW CLOSE ==================== */
+
+.image-preview-overlay.closing {
+  animation: imagePreviewFadeOut 0.4s ease forwards;
+}
+
+.image-preview-overlay.closing .image-preview-content {
+  animation: imagePreviewClose 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes imagePreviewFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes imagePreviewClose {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.94);
+    filter: blur(8px);
+  }
+}

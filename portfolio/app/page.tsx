@@ -6,12 +6,22 @@ import { shipporiMincho } from "./fonts";
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [isClosing, setIsClosing] = useState(false);
+  const [isImageOpen, setIsImageOpen] = useState(false);
+  const [isImageClosing, setIsImageClosing] = useState(false);
   const closeProjectModal = () => {
     setIsClosing(true);
 
     setTimeout(() => {
       setSelectedProject(null);
       setIsClosing(false);
+    }, 400);
+  };
+  const closeImagePreview = () => {
+    setIsImageClosing(true);
+
+    setTimeout(() => {
+      setIsImageOpen(false);
+      setIsImageClosing(false);
     }, 400);
   };
   useEffect(() => {
@@ -192,7 +202,10 @@ export default function Home() {
               <p>
                 日付ごとに予定やメモを保存できる カレンダーアプリケーション。
               </p>
-              <div className="project-modal-image">
+              <div
+                className="project-modal-image"
+                onClick={() => setIsImageOpen(true)}
+              >
                 <Image
                   src="/calendar-app.png"
                   alt="Calendar Appの画面"
@@ -234,6 +247,33 @@ export default function Home() {
                 </a>
               </div>
             </div>
+            {isImageOpen && (
+              <div
+                className={`image-preview-overlay ${
+                  isImageClosing ? "closing" : ""
+                }`}
+                onClick={closeImagePreview}
+              >
+                <button
+                  className="image-preview-close"
+                  onClick={closeImagePreview}
+                >
+                  ×
+                </button>
+
+                <div
+                  className="image-preview-content"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Image
+                    src="/calendar-app.png"
+                    alt="Calendar Appの拡大画面"
+                    width={1536}
+                    height={1024}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         )}
         <div>
