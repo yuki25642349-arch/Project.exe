@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { shipporiMincho } from "./fonts";
 
@@ -192,7 +192,14 @@ export default function Home() {
               <p>
                 日付ごとに予定やメモを保存できる カレンダーアプリケーション。
               </p>
-
+              <div className="project-modal-image">
+                <Image
+                  src="/calendar-app.png"
+                  alt="Calendar Appの画面"
+                  width={1536}
+                  height={1024}
+                />
+              </div>
               <div className="project-modal-tech">
                 <span>React</span>
                 <span>Next.js</span>
