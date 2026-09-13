@@ -5,6 +5,15 @@ import { shipporiMincho } from "./fonts";
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
+  const closeProjectModal = () => {
+    setIsClosing(true);
+
+    setTimeout(() => {
+      setSelectedProject(null);
+      setIsClosing(false);
+    }, 400);
+  };
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>(
       ".reveal, .reveal-left, .reveal-right",
@@ -165,11 +174,13 @@ export default function Home() {
 
       <section id="projects">
         {selectedProject === "calendar" && (
-          <div className="project-modal-overlay">
-            <div className="project-modal">
+          <div
+            className={`project-modal-overlay ${isClosing ? "closing" : ""}`}
+          >
+            <div className={`project-modal ${shipporiMincho.className}`}>
               <button
                 className="project-modal-close"
-                onClick={() => setSelectedProject(null)}
+                onClick={closeProjectModal}
               >
                 ×
               </button>
