@@ -574,3 +574,44 @@ body {
   background: #151515;
   color: white;
 }
+.status-field {
+  margin-bottom: 20px;
+}
+
+.status-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.status-option {
+  padding: 12px 10px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  color: #888;
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.status-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+
+  transform: translateY(-1px);
+}
+
+.status-option.active {
+  background: white;
+  border-color: white;
+  color: #080808;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.08);
+}
