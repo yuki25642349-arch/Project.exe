@@ -206,6 +206,10 @@ export default function Home() {
               {record && (
                 <>
                   <div className="record-preview">
+                    <div className={`status-badge status-${record.status}`}>
+                      {record.status}
+                    </div>
+
                     <p>{record.title}</p>
                     <small>{record.memo}</small>
                   </div>
