@@ -259,7 +259,18 @@ export default function Home() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
+            <div className="status-field">
+              <p className="input-label">進捗ステータス</p>
 
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="未着手">未着手</option>
+                <option value="進行中">進行中</option>
+                <option value="完了">完了</option>
+              </select>
+            </div>
             <div className="record-fields">
               <div className="record-field">
                 <p className="input-label">やったこと</p>
