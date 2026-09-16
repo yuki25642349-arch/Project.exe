@@ -223,6 +223,12 @@ export default function Home() {
                       <p className="hover-label">タイトル：</p>
                       <h3>{record.title}</h3>
                     </div>
+                    <div>
+                      <p className="hover-label">進捗ステータス：</p>
+                      <div className={`status-badge status-${record.status}`}>
+                        {record.status}
+                      </div>
+                    </div>
 
                     <div>
                       <p className="hover-label">やったこと：</p>
