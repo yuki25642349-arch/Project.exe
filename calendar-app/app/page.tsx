@@ -9,6 +9,7 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [memo, setMemo] = useState("");
   const [goal, setGoal] = useState("");
+  const [status, setStatus] = useState("未着手");
 
   useEffect(() => {
     if (selectedDay !== null) {
@@ -23,7 +24,15 @@ export default function Home() {
   }, [selectedDay]);
 
   const [records, setRecords] = useState<
-    Record<string, { title: string; memo: string; goal: string }>
+    Record<
+      string,
+      {
+        title: string;
+        memo: string;
+        goal: string;
+        status: string;
+      }
+    >
   >({});
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -53,6 +62,7 @@ export default function Home() {
         title,
         memo,
         goal,
+        status,
       },
     }));
 
