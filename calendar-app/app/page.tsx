@@ -125,10 +125,12 @@ export default function Home() {
       setTitle(record.title);
       setMemo(record.memo);
       setGoal(record.goal);
+      setStatus(record.status);
     } else {
       setTitle("");
       setMemo("");
       setGoal("");
+      setStatus("未着手");
     }
 
     setSelectedDay(day);
