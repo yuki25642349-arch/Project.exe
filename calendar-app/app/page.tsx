@@ -274,14 +274,41 @@ export default function Home() {
             <div className="status-field">
               <p className="input-label">進捗ステータス</p>
 
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="未着手">未着手</option>
-                <option value="進行中">進行中</option>
-                <option value="完了">完了</option>
-              </select>
+              <div className="status-options">
+                <button
+                  type="button"
+                  className={
+                    status === "未着手"
+                      ? "status-option active"
+                      : "status-option"
+                  }
+                  onClick={() => setStatus("未着手")}
+                >
+                  未着手
+                </button>
+
+                <button
+                  type="button"
+                  className={
+                    status === "進行中"
+                      ? "status-option active"
+                      : "status-option"
+                  }
+                  onClick={() => setStatus("進行中")}
+                >
+                  進行中
+                </button>
+
+                <button
+                  type="button"
+                  className={
+                    status === "完了" ? "status-option active" : "status-option"
+                  }
+                  onClick={() => setStatus("完了")}
+                >
+                  完了
+                </button>
+              </div>
             </div>
             <div className="record-fields">
               <div className="record-field">
