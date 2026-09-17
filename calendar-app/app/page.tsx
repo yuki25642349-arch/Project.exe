@@ -9,6 +9,7 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [memo, setMemo] = useState("");
   const [goal, setGoal] = useState("");
+  const [isDeadlineOpen, setIsDeadlineOpen] = useState(false);
   const [status, setStatus] = useState("未着手");
 
   useEffect(() => {
@@ -357,6 +358,12 @@ export default function Home() {
           </div>
         </div>
       )}
+      <button
+        className="deadline-button"
+        onClick={() => setIsDeadlineOpen(true)}
+      >
+        DEADLINES
+      </button>
     </main>
   );
 }
