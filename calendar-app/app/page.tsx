@@ -358,6 +358,36 @@ export default function Home() {
           </div>
         </div>
       )}
+      {isDeadlineOpen && (
+        <div
+          className="deadline-panel-overlay"
+          onClick={() => setIsDeadlineOpen(false)}
+        >
+          <aside
+            className="deadline-panel"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="deadline-panel-header">
+              <div>
+                <p>UPCOMING</p>
+                <h2>DEADLINES</h2>
+              </div>
+
+              <button
+                className="deadline-panel-close"
+                onClick={() => setIsDeadlineOpen(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="deadline-list">
+              <p>ここに期限一覧を表示</p>
+            </div>
+          </aside>
+        </div>
+      )}
+
       <button
         className="deadline-button"
         onClick={() => setIsDeadlineOpen(true)}

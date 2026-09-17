@@ -688,3 +688,90 @@ body {
   background: white;
   color: #080808;
 }
+/* ==================== DEADLINE PANEL ==================== */
+
+.deadline-panel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.deadline-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: min(420px, 90vw);
+  height: 100vh;
+
+  padding: 40px 30px;
+  box-sizing: border-box;
+
+  background: rgba(15, 15, 15, 0.96);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+
+  overflow-y: auto;
+
+  animation: deadlinePanelOpen 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes deadlinePanelOpen {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.deadline-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 35px;
+}
+
+.deadline-panel-header p {
+  margin: 0 0 5px;
+
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+
+.deadline-panel-header h2 {
+  margin: 0;
+
+  font-size: 28px;
+  letter-spacing: 0.05em;
+}
+
+.deadline-panel-close {
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.deadline-panel-close:hover {
+  background: white;
+  color: #080808;
+
+  transform: rotate(90deg);
+}
