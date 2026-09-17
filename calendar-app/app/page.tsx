@@ -10,6 +10,7 @@ export default function Home() {
   const [memo, setMemo] = useState("");
   const [goal, setGoal] = useState("");
   const [isDeadlineOpen, setIsDeadlineOpen] = useState(false);
+  const [isDeadlineClosing, setIsDeadlineClosing] = useState(false);
   const [status, setStatus] = useState("未着手");
 
   useEffect(() => {
@@ -142,6 +143,14 @@ export default function Home() {
     }
 
     setSelectedDay(day);
+  };
+  const closeDeadlinePanel = () => {
+    setIsDeadlineClosing(true);
+
+    setTimeout(() => {
+      setIsDeadlineOpen(false);
+      setIsDeadlineClosing(false);
+    }, 350);
   };
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
@@ -360,8 +369,10 @@ export default function Home() {
       )}
       {isDeadlineOpen && (
         <div
-          className="deadline-panel-overlay"
-          onClick={() => setIsDeadlineOpen(false)}
+          className={`deadline-panel-overlay ${
+            isDeadlineClosing ? "closing" : ""
+          }`}
+          onClick={closeDeadlinePanel}
         >
           <aside
             className="deadline-panel"
@@ -375,7 +386,7 @@ export default function Home() {
 
               <button
                 className="deadline-panel-close"
-                onClick={() => setIsDeadlineOpen(false)}
+                onClick={closeDeadlinePanel}
               >
                 ×
               </button>

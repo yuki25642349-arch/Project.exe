@@ -775,3 +775,32 @@ body {
 
   transform: rotate(90deg);
 }
+.deadline-panel-overlay.closing {
+  animation: deadlineOverlayClose 0.35s ease forwards;
+}
+
+.deadline-panel-overlay.closing .deadline-panel {
+  animation: deadlinePanelClose 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes deadlinePanelClose {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes deadlineOverlayClose {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
