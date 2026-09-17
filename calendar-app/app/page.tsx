@@ -152,7 +152,25 @@ export default function Home() {
       setIsDeadlineClosing(false);
     }, 350);
   };
-  const deadlineRecords = Object.entries(records);
+  const activeDeadlineRecords = Object.entries(records)
+    .filter(([date, record]) => {
+      const recordDate = new Date(date);
+
+      return (
+        record.status !== "完了" &&
+        recordDate >=
+          new Date(today.getFullYear(), today.getMonth(), today.getDate())
+      );
+    })
+    .sort(([dateA], [dateB]) => {
+      return new Date(dateA).getTime() - new Date(dateB).getTime();
+    });
+
+  const completedDeadlineRecords = Object.entries(records)
+    .filter(([, record]) => record.status === "完了")
+    .sort(([dateA], [dateB]) => {
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <header className="calendar-header">
@@ -394,7 +412,54 @@ export default function Home() {
             </div>
 
             <div className="deadline-list">
-              <p>ここに期限一覧を表示</p>
+              <p className="deadline-section-label">ACTIVE</p>
+
+              {activeDeadlineRecords.map(([date, record]) => {
+                const recordDate = new Date(date);
+
+                const daysLeft = Math.ceil(
+                  (recordDate.getTime() - today.getTime()) /
+                    (1000 * 60 * 60 * 24),
+                );
+
+                return (
+                  <div className="deadline-item" key={date}>
+                    <div className="deadline-item-top">
+                      <span className="deadline-item-date">{date}</span>
+
+                      <span className="deadline-item-days">
+                        {daysLeft === 0 ? "TODAY" : `${daysLeft}日`}
+                      </span>
+                    </div>
+
+                    <h3>{record.title}</h3>
+
+                    <p>{record.goal}</p>
+
+                    <div className={`status-badge status-${record.status}`}>
+                      {record.status}
+                    </div>
+                  </div>
+                );
+              })}
+
+              <p className="deadline-section-label completed-label">
+                COMPLETED
+              </p>
+
+              {completedDeadlineRecords.map(([date, record]) => (
+                <div className="deadline-item completed-item" key={date}>
+                  <div className="deadline-item-top">
+                    <span className="deadline-item-date">{date}</span>
+                  </div>
+
+                  <h3>{record.title}</h3>
+
+                  <p>{record.goal}</p>
+
+                  <div className="status-badge status-完了">完了</div>
+                </div>
+              ))}
             </div>
           </aside>
         </div>
