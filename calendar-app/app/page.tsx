@@ -86,6 +86,13 @@ export default function Home() {
       year === today.getFullYear()
     );
   };
+  const getDaysLeft = (day: number) => {
+    const targetDate = new Date(year, month, day);
+
+    const difference = targetDate.getTime() - today.getTime();
+
+    return Math.ceil(difference / (1000 * 60 * 60 * 24));
+  };
 
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -189,7 +196,7 @@ export default function Home() {
 
         {days.map((day) => {
           const record = records[getDateKey(day)];
-
+          const daysLeft = getDaysLeft(day);
           const isMatch =
             searchText === "" ||
             record?.title.toLowerCase().includes(searchText.toLowerCase());
@@ -211,7 +218,11 @@ export default function Home() {
                     <div className={`status-badge status-${record.status}`}>
                       {record.status}
                     </div>
-
+                    {record.status !== "完了" && daysLeft >= 0 && (
+                      <span className="deadline">
+                        {daysLeft === 0 ? "今日まで" : `${daysLeft}日`}
+                      </span>
+                    )}
                     <p>{record.title}</p>
                     <small>{record.memo}</small>
                   </div>
