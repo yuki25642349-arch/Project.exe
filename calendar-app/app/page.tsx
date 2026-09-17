@@ -152,6 +152,7 @@ export default function Home() {
       setIsDeadlineClosing(false);
     }, 350);
   };
+  const deadlineRecords = Object.entries(records);
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <header className="calendar-header">
