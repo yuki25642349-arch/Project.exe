@@ -907,3 +907,150 @@ body {
   background: white;
   color: #080808;
 }
+/* ==================== AI MODAL ==================== */
+
+.ai-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+.ai-modal {
+  position: relative;
+
+  width: min(600px, 90vw);
+  padding: 45px;
+
+  background: rgba(15, 15, 15, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+
+  animation: aiModalOpen 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes aiModalOpen {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ai-modal-label {
+  margin: 0 0 8px;
+
+  color: #777;
+
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+.ai-modal h2 {
+  margin: 0 0 10px;
+
+  font-size: 30px;
+}
+
+.ai-modal-description {
+  margin: 0 0 28px;
+
+  color: #888;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ai-modal textarea {
+  width: 100%;
+  min-height: 150px;
+
+  padding: 18px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+
+  color: white;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+
+  resize: vertical;
+  outline: none;
+
+  transition: 0.25s;
+}
+
+.ai-modal textarea:focus {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.ai-generate-button {
+  width: 100%;
+
+  margin-top: 18px;
+  padding: 15px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: white;
+  color: #080808;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.ai-generate-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.ai-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.ai-modal-close:hover {
+  background: white;
+  color: #080808;
+
+  transform: rotate(90deg);
+}

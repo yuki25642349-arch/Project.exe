@@ -388,6 +388,34 @@ export default function Home() {
           </div>
         </div>
       )}
+      {isAiOpen && (
+        <div className="ai-modal-overlay" onClick={() => setIsAiOpen(false)}>
+          <div className="ai-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="ai-modal-close"
+              onClick={() => setIsAiOpen(false)}
+            >
+              ×
+            </button>
+
+            <p className="ai-modal-label">AI SCHEDULE</p>
+
+            <h2>予定をAIで作成</h2>
+
+            <p className="ai-modal-description">
+              やりたいことや期限を自由に入力してください。
+            </p>
+
+            <textarea
+              value={aiInput}
+              onChange={(e) => setAiInput(e.target.value)}
+              placeholder="例：来週の金曜日までにReactの基礎を終わらせたい"
+            />
+
+            <button className="ai-generate-button">✦ GENERATE</button>
+          </div>
+        </div>
+      )}
       {isDeadlineOpen && (
         <div
           className={`deadline-panel-overlay ${
@@ -472,6 +500,9 @@ export default function Home() {
         onClick={() => setIsDeadlineOpen(true)}
       >
         DEADLINES
+      </button>
+      <button className="ai-button" onClick={() => setIsAiOpen(true)}>
+        ✦ AI ADD
       </button>
     </main>
   );
