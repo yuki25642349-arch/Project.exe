@@ -173,27 +173,22 @@ export default function Home() {
     .sort(([dateA], [dateB]) => {
       return new Date(dateB).getTime() - new Date(dateA).getTime();
     });
-  const generateAiSchedule = () => {
-    const aiResult = {
-      date: "2026-09-25",
-      title: "React基礎学習",
-      memo: "",
-      goal: "Reactの基礎学習を終わらせる",
-      status: "未着手",
-    };
+  const generateAiSchedule = async () => {
+    const response = await fetch("/api/ai", {
+      method: "POST",
 
-    setRecords((prev) => ({
-      ...prev,
-      [aiResult.date]: {
-        title: aiResult.title,
-        memo: aiResult.memo,
-        goal: aiResult.goal,
-        status: aiResult.status,
+      headers: {
+        "Content-Type": "application/json",
       },
-    }));
 
-    setAiInput("");
-    setIsAiOpen(false);
+      body: JSON.stringify({
+        text: aiInput,
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log("サーバーから返ってきたデータ:", data);
   };
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
