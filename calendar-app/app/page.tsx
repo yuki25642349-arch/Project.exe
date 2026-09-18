@@ -10,6 +10,8 @@ export default function Home() {
   const [memo, setMemo] = useState("");
   const [goal, setGoal] = useState("");
   const [isDeadlineOpen, setIsDeadlineOpen] = useState(false);
+  const [isAiOpen, setIsAiOpen] = useState(false);
+  const [aiInput, setAiInput] = useState("");
   const [isDeadlineClosing, setIsDeadlineClosing] = useState(false);
   const [status, setStatus] = useState("未着手");
 
