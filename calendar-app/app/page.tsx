@@ -173,6 +173,28 @@ export default function Home() {
     .sort(([dateA], [dateB]) => {
       return new Date(dateB).getTime() - new Date(dateA).getTime();
     });
+  const generateAiSchedule = () => {
+    const aiResult = {
+      date: "2026-09-25",
+      title: "React基礎学習",
+      memo: "",
+      goal: "Reactの基礎学習を終わらせる",
+      status: "未着手",
+    };
+
+    setRecords((prev) => ({
+      ...prev,
+      [aiResult.date]: {
+        title: aiResult.title,
+        memo: aiResult.memo,
+        goal: aiResult.goal,
+        status: aiResult.status,
+      },
+    }));
+
+    setAiInput("");
+    setIsAiOpen(false);
+  };
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <header className="calendar-header">
@@ -412,7 +434,9 @@ export default function Home() {
               placeholder="例：来週の金曜日までにReactの基礎を終わらせたい"
             />
 
-            <button className="ai-generate-button">✦ GENERATE</button>
+            <button className="ai-generate-button" onClick={generateAiSchedule}>
+              ✦ GENERATE
+            </button>
           </div>
         </div>
       )}
