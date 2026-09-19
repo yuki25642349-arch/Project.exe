@@ -2,6 +2,8 @@
 
 import { shipporiMincho } from "./fonts";
 import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
@@ -14,6 +16,42 @@ export default function Home() {
   const [aiInput, setAiInput] = useState("");
   const [isDeadlineClosing, setIsDeadlineClosing] = useState(false);
   const [status, setStatus] = useState("未着手");
+
+  useEffect(() => {
+    const fetchRecords = async () => {
+      const { data, error } = await supabase.from("records").select("*");
+
+      if (error) {
+        console.error("Supabaseエラー:", error);
+        return;
+      }
+
+      const convertedRecords: Record<
+        string,
+        {
+          title: string;
+          memo: string;
+          goal: string;
+          status: string;
+        }
+      > = {};
+
+      data.forEach((record) => {
+        convertedRecords[record.date] = {
+          title: record.title,
+          memo: record.memo,
+          goal: record.goal,
+          status: record.status,
+        };
+      });
+
+      console.log("変換後:", convertedRecords);
+
+      setRecords(convertedRecords);
+    };
+
+    fetchRecords();
+  }, []);
 
   useEffect(() => {
     if (selectedDay !== null) {
