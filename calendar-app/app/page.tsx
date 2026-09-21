@@ -100,23 +100,41 @@ export default function Home() {
 
     const dateKey = getDateKey(selectedDay);
 
-    const { data, error } = await supabase
-      .from("records")
-      .insert({
+    // その日にすでに予定があるか確認
+    const existingRecord = records[dateKey];
+
+    let error;
+
+    if (existingRecord) {
+      // 既存の予定 → UPDATE
+      const result = await supabase
+        .from("records")
+        .update({
+          title: title,
+          memo: memo,
+          goal: goal,
+          status: status,
+        })
+        .eq("date", dateKey);
+
+      error = result.error;
+    } else {
+      // 新しい予定 → INSERT
+      const result = await supabase.from("records").insert({
         date: dateKey,
         title: title,
         memo: memo,
         goal: goal,
         status: status,
-      })
-      .select();
+      });
+
+      error = result.error;
+    }
 
     if (error) {
       console.error("保存エラー:", error);
       return;
     }
-
-    console.log("DBに保存成功:", data);
 
     setRecords((prev) => ({
       ...prev,
