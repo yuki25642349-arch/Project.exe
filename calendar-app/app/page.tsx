@@ -184,7 +184,7 @@ export default function Home() {
   const nextMonth = () => {
     setCurrentDate(new Date(year, month + 1, 1));
   };
-  const deleteRecord = () => {
+  const deleteRecord = async () => {
     if (selectedDay === null) return;
 
     const isConfirmed = window.confirm(
@@ -193,10 +193,22 @@ export default function Home() {
 
     if (!isConfirmed) return;
 
+    const dateKey = getDateKey(selectedDay);
+
+    const { error } = await supabase
+      .from("records")
+      .delete()
+      .eq("date", dateKey);
+
+    if (error) {
+      console.error("削除エラー:", error);
+      return;
+    }
+
     setRecords((prev) => {
       const newRecords = { ...prev };
 
-      delete newRecords[getDateKey(selectedDay)];
+      delete newRecords[dateKey];
 
       return newRecords;
     });
