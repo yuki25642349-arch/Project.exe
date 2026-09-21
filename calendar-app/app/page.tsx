@@ -95,12 +95,32 @@ export default function Home() {
 
     localStorage.setItem("calendar-records", JSON.stringify(records));
   }, [records, isLoaded]);
-  const saveRecord = () => {
+  const saveRecord = async () => {
     if (selectedDay === null) return;
+
+    const dateKey = getDateKey(selectedDay);
+
+    const { data, error } = await supabase
+      .from("records")
+      .insert({
+        date: dateKey,
+        title: title,
+        memo: memo,
+        goal: goal,
+        status: status,
+      })
+      .select();
+
+    if (error) {
+      console.error("保存エラー:", error);
+      return;
+    }
+
+    console.log("DBに保存成功:", data);
 
     setRecords((prev) => ({
       ...prev,
-      [getDateKey(selectedDay)]: {
+      [dateKey]: {
         title,
         memo,
         goal,
@@ -112,6 +132,7 @@ export default function Home() {
     setTitle("");
     setMemo("");
     setGoal("");
+    setStatus("未着手");
   };
 
   const year = currentDate.getFullYear();
