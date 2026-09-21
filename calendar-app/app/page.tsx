@@ -15,6 +15,7 @@ export default function Home() {
   const [isAiOpen, setIsAiOpen] = useState(false);
   const [aiInput, setAiInput] = useState("");
   const [isDeadlineClosing, setIsDeadlineClosing] = useState(false);
+  const [isModalClosing, setIsModalClosing] = useState(false);
   const [status, setStatus] = useState("未着手");
 
   useEffect(() => {
@@ -146,11 +147,7 @@ export default function Home() {
       },
     }));
 
-    setSelectedDay(null);
-    setTitle("");
-    setMemo("");
-    setGoal("");
-    setStatus("未着手");
+    closeModal();
   };
 
   const year = currentDate.getFullYear();
@@ -204,7 +201,7 @@ export default function Home() {
       return newRecords;
     });
 
-    setSelectedDay(null);
+    closeModal();
   };
   const openDay = (day: number) => {
     const record = records[getDateKey(day)];
@@ -266,6 +263,14 @@ export default function Home() {
     const data = await response.json();
 
     console.log("サーバーから返ってきたデータ:", data);
+  };
+  const closeModal = () => {
+    setIsModalClosing(true);
+
+    setTimeout(() => {
+      setSelectedDay(null);
+      setIsModalClosing(false);
+    }, 350);
   };
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
@@ -386,12 +391,9 @@ export default function Home() {
       </div>
 
       {selectedDay !== null && (
-        <div className="modal-overlay">
+        <div className={`modal-overlay ${isModalClosing ? "closing" : ""}`}>
           <div className="day-modal">
-            <button
-              className="close-button"
-              onClick={() => setSelectedDay(null)}
-            >
+            <button className="close-button" onClick={closeModal}>
               ×
             </button>
 

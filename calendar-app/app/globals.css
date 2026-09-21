@@ -1054,3 +1054,34 @@ body {
 
   transform: rotate(90deg);
 }
+/* ==================== MODAL CLOSE ==================== */
+
+.modal-overlay.closing {
+  animation: modalOverlayClose 0.35s ease forwards;
+}
+
+.modal-overlay.closing .day-modal {
+  animation: modalClose 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes modalClose {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+}
+
+@keyframes modalOverlayClose {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
