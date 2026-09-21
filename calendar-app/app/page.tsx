@@ -77,25 +77,8 @@ export default function Home() {
       }
     >
   >({});
-
-  const [isLoaded, setIsLoaded] = useState(false);
   // 最初にlocalStorageから読み込む
-  useEffect(() => {
-    const savedRecords = localStorage.getItem("calendar-records");
 
-    if (savedRecords) {
-      setRecords(JSON.parse(savedRecords));
-    }
-
-    setIsLoaded(true);
-  }, []);
-
-  // recordsが変わったらlocalStorageに保存
-  useEffect(() => {
-    if (!isLoaded) return;
-
-    localStorage.setItem("calendar-records", JSON.stringify(records));
-  }, [records, isLoaded]);
   const saveRecord = async () => {
     if (selectedDay === null) return;
 
