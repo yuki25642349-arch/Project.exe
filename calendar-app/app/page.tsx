@@ -284,6 +284,23 @@ export default function Home() {
   };
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
+      <div className="auth-test">
+        <input
+          type="email"
+          placeholder="メールアドレス"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="パスワード"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button onClick={signUp}>新規登録</button>
+      </div>
       <header className="calendar-header">
         <div className="calendar-header-top">
           <h1>Calendar</h1>
