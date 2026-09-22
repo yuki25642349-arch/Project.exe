@@ -11,6 +11,8 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [memo, setMemo] = useState("");
   const [goal, setGoal] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isDeadlineOpen, setIsDeadlineOpen] = useState(false);
   const [isAiOpen, setIsAiOpen] = useState(false);
   const [aiInput, setAiInput] = useState("");
@@ -266,6 +268,19 @@ export default function Home() {
       setSelectedDay(null);
       setIsModalClosing(false);
     }, 350);
+  };
+  const signUp = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      console.error("新規登録エラー:", error);
+      return;
+    }
+
+    console.log("新規登録成功:", data);
   };
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
