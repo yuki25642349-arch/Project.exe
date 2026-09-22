@@ -282,6 +282,19 @@ export default function Home() {
 
     console.log("新規登録成功:", data);
   };
+  const signIn = async () => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      console.error("ログインエラー:", error);
+      return;
+    }
+
+    console.log("ログイン成功:", data);
+  };
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <div className="auth-test">
@@ -300,6 +313,7 @@ export default function Home() {
         />
 
         <button onClick={signUp}>新規登録</button>
+        <button onClick={signIn}>ログイン</button>
       </div>
       <header className="calendar-header">
         <div className="calendar-header-top">
