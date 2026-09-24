@@ -77,7 +77,7 @@ export default function Home() {
     };
 
     fetchRecords();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (selectedDay !== null) {
@@ -343,8 +343,28 @@ export default function Home() {
   if (!user) {
     return (
       <main className={`calendar-page ${shipporiMincho.className}`}>
-        <h1>Calendar</h1>
-        <p>ログインしてください</p>
+        <div className="auth-container">
+          <h1>Calendar</h1>
+          <p>ログインしてください</p>
+
+          <input
+            type="email"
+            placeholder="メールアドレス"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            type="password"
+            placeholder="パスワード"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button onClick={signIn}>ログイン</button>
+
+          <button onClick={signUp}>新規登録</button>
+        </div>
       </main>
     );
   }
