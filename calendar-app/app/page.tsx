@@ -84,11 +84,22 @@ export default function Home() {
   const saveRecord = async () => {
     if (selectedDay === null) return;
 
+    // 現在ログインしているユーザーを取得
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      console.error("ユーザーを取得できません:", userError);
+      return;
+    }
+
+    console.log("ログイン中のユーザーID:", user.id);
+
     const dateKey = getDateKey(selectedDay);
 
-    // その日にすでに予定があるか確認
     const existingRecord = records[dateKey];
-
     let error;
 
     if (existingRecord) {
@@ -112,6 +123,7 @@ export default function Home() {
         memo: memo,
         goal: goal,
         status: status,
+        user_id: user.id,
       });
 
       error = result.error;
@@ -385,15 +397,17 @@ export default function Home() {
 
               {record && (
                 <>
+                  {record.status !== "完了" && daysLeft >= 0 && (
+                    <span className="deadline">
+                      {daysLeft === 0 ? "今日まで" : `${daysLeft}日`}
+                    </span>
+                  )}
+
                   <div className="record-preview">
                     <div className={`status-badge status-${record.status}`}>
                       {record.status}
                     </div>
-                    {record.status !== "完了" && daysLeft >= 0 && (
-                      <span className="deadline">
-                        {daysLeft === 0 ? "今日まで" : `${daysLeft}日`}
-                      </span>
-                    )}
+
                     <p>{record.title}</p>
                     <small>{record.memo}</small>
                   </div>
