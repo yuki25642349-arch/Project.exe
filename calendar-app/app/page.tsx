@@ -372,7 +372,13 @@ export default function Home() {
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <header className="calendar-header">
         <div className="calendar-header-top">
-          <h1>Calendar</h1>
+          <div className="calendar-title-area">
+            <h1>Calendar</h1>
+
+            <button className="logout-button" onClick={signOut}>
+              LOGOUT
+            </button>
+          </div>
 
           <div className="month-selector">
             <button className="month-button" onClick={previousMonth}>
@@ -700,7 +706,6 @@ export default function Home() {
       <button className="ai-button" onClick={() => setIsAiOpen(true)}>
         ✦ AI ADD
       </button>
-      {user && <button onClick={signOut}>ログアウト</button>}
     </main>
   );
 }

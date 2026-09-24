@@ -1138,3 +1138,31 @@ body {
 .auth-container button:hover {
   opacity: 0.8;
 }
+.calendar-title-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logout-button {
+  padding: 9px 14px;
+
+  background: transparent;
+  color: #777;
+
+  border: 1px solid #2c2c2c;
+  border-radius: 999px;
+
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.logout-button:hover {
+  background: white;
+  color: #080808;
+  border-color: white;
+}
