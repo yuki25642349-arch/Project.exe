@@ -1166,3 +1166,23 @@ body {
   color: #080808;
   border-color: white;
 }
+.auth-container .auth-switch {
+  padding: 6px;
+
+  background: transparent;
+  color: #777;
+
+  border: none;
+  border-radius: 0;
+
+  font-size: 11px;
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+}
+
+.auth-container .auth-switch:hover {
+  background: transparent;
+  color: #fff;
+  opacity: 1;
+}
