@@ -20,6 +20,7 @@ export default function Home() {
   const [isDeadlineClosing, setIsDeadlineClosing] = useState(false);
   const [isModalClosing, setIsModalClosing] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [isSignUp, setIsSignUp] = useState(false);
   useEffect(() => {
     const getCurrentUser = async () => {
       const {
@@ -345,7 +346,10 @@ export default function Home() {
       <main className={`calendar-page ${shipporiMincho.className}`}>
         <div className="auth-container">
           <h1>Calendar</h1>
-          <p>ログインしてください</p>
+
+          <p>
+            {isSignUp ? "アカウントを作成してください" : "ログインしてください"}
+          </p>
 
           <input
             type="email"
@@ -361,9 +365,20 @@ export default function Home() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button onClick={signIn}>ログイン</button>
+          {isSignUp ? (
+            <button onClick={signUp}>SIGN UP</button>
+          ) : (
+            <button onClick={signIn}>LOGIN</button>
+          )}
 
-          <button onClick={signUp}>新規登録</button>
+          <button
+            className="auth-switch"
+            onClick={() => setIsSignUp(!isSignUp)}
+          >
+            {isSignUp
+              ? "すでにアカウントをお持ちの方 → LOGIN"
+              : "アカウントをお持ちでない方 → CREATE ACCOUNT"}
+          </button>
         </div>
       </main>
     );
