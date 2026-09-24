@@ -2,6 +2,7 @@
 
 import { shipporiMincho } from "./fonts";
 import { useEffect, useState } from "react";
+import type { User } from "@supabase/supabase-js";
 import { supabase } from "../lib/supabase";
 
 export default function Home() {
@@ -18,6 +19,28 @@ export default function Home() {
   const [aiInput, setAiInput] = useState("");
   const [isDeadlineClosing, setIsDeadlineClosing] = useState(false);
   const [isModalClosing, setIsModalClosing] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      setUser(user);
+    };
+
+    getCurrentUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
   const [status, setStatus] = useState("未着手");
 
   useEffect(() => {
