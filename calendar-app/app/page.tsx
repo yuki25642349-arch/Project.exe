@@ -330,6 +330,24 @@ export default function Home() {
 
     console.log("ログイン成功:", data);
   };
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("ログアウトエラー:", error);
+      return;
+    }
+
+    console.log("ログアウト成功");
+  };
+  if (!user) {
+    return (
+      <main className={`calendar-page ${shipporiMincho.className}`}>
+        <h1>Calendar</h1>
+        <p>ログインしてください</p>
+      </main>
+    );
+  }
   return (
     <main className={`calendar-page ${shipporiMincho.className}`}>
       <div className="auth-test">
@@ -680,6 +698,7 @@ export default function Home() {
       <button className="ai-button" onClick={() => setIsAiOpen(true)}>
         ✦ AI ADD
       </button>
+      {user && <button onClick={signOut}>ログアウト</button>}
     </main>
   );
 }
