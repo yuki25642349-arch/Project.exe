@@ -21,6 +21,8 @@ export default function Home() {
   const [isModalClosing, setIsModalClosing] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [authError, setAuthError] = useState("");
+  const [authMessage, setAuthMessage] = useState("");
   useEffect(() => {
     const getCurrentUser = async () => {
       const {
@@ -52,6 +54,9 @@ export default function Home() {
         console.error("Supabaseエラー:", error);
         return;
       }
+
+      setAuthError("");
+      console.log("ログイン成功:", data);
 
       const convertedRecords: Record<
         string,
@@ -123,35 +128,19 @@ export default function Home() {
 
     const dateKey = getDateKey(selectedDay);
 
-    const existingRecord = records[dateKey];
-    let error;
-
-    if (existingRecord) {
-      // 既存の予定 → UPDATE
-      const result = await supabase
-        .from("records")
-        .update({
-          title: title,
-          memo: memo,
-          goal: goal,
-          status: status,
-        })
-        .eq("date", dateKey);
-
-      error = result.error;
-    } else {
-      // 新しい予定 → INSERT
-      const result = await supabase.from("records").insert({
+    const { error } = await supabase.from("records").upsert(
+      {
+        user_id: user.id,
         date: dateKey,
         title: title,
         memo: memo,
         goal: goal,
         status: status,
-        user_id: user.id,
-      });
-
-      error = result.error;
-    }
+      },
+      {
+        onConflict: "user_id,date",
+      },
+    );
 
     if (error) {
       console.error("保存エラー:", error);
@@ -313,8 +302,13 @@ export default function Home() {
 
     if (error) {
       console.error("新規登録エラー:", error);
+
+      setAuthError("アカウントの作成に失敗しました");
+      setAuthMessage("");
       return;
     }
+    setAuthError("");
+    setAuthMessage("確認メールを送信しましたメールを確認してください");
 
     console.log("新規登録成功:", data);
   };
@@ -326,6 +320,7 @@ export default function Home() {
 
     if (error) {
       console.error("ログインエラー:", error);
+      setAuthError("メールアドレスまたはパスワードが違います");
       return;
     }
 
@@ -364,6 +359,9 @@ export default function Home() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {authError && <p className="auth-error">{authError}</p>}
+
+          {authMessage && <p className="auth-message">{authMessage}</p>}
 
           {isSignUp ? (
             <button onClick={signUp}>SIGN UP</button>
@@ -373,7 +371,11 @@ export default function Home() {
 
           <button
             className="auth-switch"
-            onClick={() => setIsSignUp(!isSignUp)}
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              setAuthError("");
+              setAuthMessage("");
+            }}
           >
             {isSignUp
               ? "すでにアカウントをお持ちの方 → LOGIN"
